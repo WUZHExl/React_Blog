@@ -1,24 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import Routes from './routes'
+import React from 'react'
+import './assets/global.css'
+import 'antd/dist/antd.min.css';
+import {useLocation} from 'react-router-dom'
+
 
 function App() {
+
+  const path=useLocation()
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.Fragment>
+    {
+    path.pathname.startsWith('/article')||path.pathname==='/'?
+    <div className="main">
+      <Routes/>
+    </div>:
+    <Routes/>
+    }
+    </React.Fragment>
   );
 }
 

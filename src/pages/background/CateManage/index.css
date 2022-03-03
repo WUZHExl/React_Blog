@@ -1,0 +1,25 @@
+.bread{
+  padding: 20px 20px !important;
+}
+
+.row-bg {
+  padding: 0px 20px !important;
+}
+
+span{
+  padding: 0 3px;
+  cursor: pointer;
+}
+
+h1{
+  cursor: pointer
+}
+
+.cateList{
+  margin: 20px 20px !important;
+}
+
+.row_space{
+  padding-top: 5px;
+}
+

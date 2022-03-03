@@ -1,0 +1,60 @@
+.edit_wrap {
+  padding: 30px;
+  font-size: 16px;
+}
+
+.return_button {
+  text-align: left;
+  margin-bottom: 40px;
+}
+
+.tag_wrap {
+  text-align: left;
+  margin: 20px 0;
+}
+
+.el-tag {
+  margin-left: 10px;
+}
+
+.button-new-tag {
+  margin-left: 10px;
+  height: 32px;
+  width: 90px;
+  /* // line-height: 30px;
+  // padding-top: 0;
+  // padding-bottom: 0; */
+}
+.input-new-tag {
+  width: 90px;
+  height: 32px;
+  margin-left: 10px;
+  vertical-align: bottom;
+}
+
+.edit_wrap textarea {
+  outline: none;
+  font-size: 16px;
+}
+
+.edit_head {
+  margin: 20px 0;
+  text-align: left;
+}
+
+.save_button {
+  padding: 40px 0;
+}
+
+.site-tag-plus {
+  background: #fff;
+  border-style: dashed;
+}
+.edit-tag {
+  user-select: none;
+}
+.tag-input {
+  width: 78px !important;
+  margin-right: 8px;
+  vertical-align: top;
+}

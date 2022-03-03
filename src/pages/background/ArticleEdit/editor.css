@@ -1,0 +1,28 @@
+.editor-wrap {
+  width: 100%;
+  height: 100%;
+}
+.editor-wrap :global .for-toolbar {
+  background: linear-gradient(to right, #55efc4, #81ecec, #74b9ff);
+}
+.editor-wrap :global .for-container .for-editor .for-panel .for-preview {
+  background-color: #fafafa;
+}
+.editor-wrap :global .for-editor-edit::-webkit-scrollbar,
+.editor-wrap :global .for-editor-preview::-webkit-scrollbar {
+  width: 6px;
+  height: 4px;
+  background-color: transparent;
+}
+.editor-wrap :global .for-editor-edit::-webkit-scrollbar-thumb,
+.editor-wrap :global .for-editor-preview::-webkit-scrollbar-thumb {
+  height: 4px;
+  border-radius: 10px;
+  background: linear-gradient(to bottom, #55efc4, #81ecec, #74b9ff);
+}
+.editor-wrap :global .for-editor-edit::-webkit-scrollbar-track,
+.editor-wrap :global .for-editor-preview::-webkit-scrollbar-track {
+  /*滚动槽轨道样式*/
+  border-radius: 0;
+  background: rgba(0, 0, 0, 0.1);
+}
