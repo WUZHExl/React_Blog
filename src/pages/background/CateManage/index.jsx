@@ -1,39 +1,35 @@
-import React,{useRef} from 'react'
+import React,{useRef,useState,useEffect,useCallback} from 'react'
 import { Card,Button, Row, Col,Modal,Input,message,Popconfirm } from 'antd';
 import {Link} from 'react-router-dom'
 import Breadcrumb from '../../../components/background/Breadcrumb';
 import axios from 'axios'
 import './index.css'
+import {
+  getLists
+} from '../../../redux/actions'
+//引入connect用于连接UI组件与redux
+import {connect} from 'react-redux'
 
-export default function CateManage() {
+function CateManage(props) {
 
-  let [cateList,setCateList]= React.useState([])
-  const [visible,setVisible] = React.useState(false)
-  const [changeVisible,setChangeVisible] = React.useState(false)
-  const [preCate,setPreCate] = React.useState({id:'',prename:''})
+  let [cateList,setCateList]= useState([])
+  const [visible,setVisible] = useState(false)
+  const [changeVisible,setChangeVisible] = useState(false)
+  const [preCate,setPreCate] = useState({id:'',prename:''})
   const newCateValue=useRef()
   const changeCateValue=useRef()
+  const {getList}=props
 
-  React.useEffect(() =>{
+  let getAllCateLists=useCallback(()=>{
+    getList({url:'cate'})
+    setCateList(props.cateList)
+  },[getList,props.cateList])
+
+  useEffect(() =>{
 
     getAllCateLists()
-    // return ()=>mounted=false
     },
-  [])
-
-  let getAllCateLists=()=>{
-    let cateList=[]
-    // let mounted=true
-    axios.get('/api/cate')
-    .then(
-      response =>{
-        cateList.splice(0,cateList.length,...response.data)
-        cateList=cateList.reverse()
-        //  if(mounted)
-         setCateList(cateList)
-      }
-    )
-  }
+  [getAllCateLists])
 
   const handleOk=()=>{
     let cate=newCateValue.current.state.value
@@ -151,3 +147,18 @@ export default function CateManage() {
   </React.Fragment>
   )
 }
+
+export default connect(
+
+  // mapStateToProps
+  state =>({
+    cateList:state.cateList
+  }),
+
+
+  // mapDispatchToProps
+  dispatch => ({
+    getList:data=>dispatch(getLists(data)),
+  })
+
+)(CateManage)

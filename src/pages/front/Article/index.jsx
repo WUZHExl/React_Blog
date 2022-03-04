@@ -1,29 +1,28 @@
 import React from 'react'
 import {useNavigate} from 'react-router-dom'
 import { Tag } from 'antd';
-import axios from 'axios'
+// import axios from 'axios'
 import './index.css'
 
+// import store from '../../../redux/store'
+import {
+  getLists
+} from '../../../redux/actions'
+//引入connect用于连接UI组件与redux
+import {connect} from 'react-redux'
 
 
-export default function Article(props) {
+function Article(props) {
 
-  let [articleList,setArticleList] = React.useState([])
-  console.log(props.test)
-  // const [articleDetail,setArticleDetail] = React.useState()
+  // let [articleList,setArticleList] = React.useState([])
   let key=1
   const navigate = useNavigate()
+  const {getList}=props
   React.useEffect(()=>{
-      let articleList =[]
-      axios.get('/api/article')
-      .then(
-        response =>{
-          articleList.splice(0,articleList.length,...response.data)
-          articleList=articleList.reverse()
-          setArticleList(articleList)
-        }
-      )
-  },[])
+
+      getList({url:'article'})
+      
+  },[getList])
 
   let pathChange=(id)=>{
       //第一种使用方式：指定具体的路径
@@ -33,13 +32,12 @@ export default function Article(props) {
   }
 
 
-  
-
   return (
 
     <div className="content">
+        {/* {console.log(articleList)} */}
         {
-          articleList.map(article=>{
+          props.articleList.map(article=>{
             let cate
             if(article.cate.split(',').length === 0||article.cate.split(',')[0]===''){
               cate=<span>未分类</span>
@@ -70,5 +68,16 @@ export default function Article(props) {
 }
 
 
+export default connect(
+  // mapStateToProps
+  state =>({
+    articleList:state.articleList
+  }),
 
+
+  // mapDispatchToProps
+  dispatch => ({
+    getList:data=>dispatch(getLists(data)),
+  })
+)(Article)
 

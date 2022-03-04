@@ -1,31 +1,30 @@
-import React from 'react'
+import React,{useCallback} from 'react'
 import { Card,Button, Row, Col,Popconfirm,message} from 'antd';
 import Breadcrumb from '../../../components/background/Breadcrumb'
 import {Link} from 'react-router-dom'
 import './index.css'
 import axios from 'axios'
-export default function ArticleManage() {
+import {
+  getLists
+} from '../../../redux/actions'
+//引入connect用于连接UI组件与redux
+import {connect} from 'react-redux'
+
+function ArticleManage(props){
 
   let [articleList,setArticleList]= React.useState([])
+  const {getList}=props
+  const getAllArticle=useCallback(()=>{
+
+    getList({url:'article'})
+    setArticleList(props.articleList)
+    // console.log(props)
+
+  },[getList,props.articleList])
+
   React.useEffect(() =>{
     getAllArticle()
-    // return ()=>mounted=false
-    },
-  [])
-
-  const getAllArticle=()=>{
-    let articleList=[]
-    // let mounted=true
-    axios.get('/api/article')
-    .then(
-      response =>{
-        articleList.splice(0,articleList.length,...response.data)
-        articleList=articleList.reverse()
-        //  if(mounted)
-         setArticleList(articleList)
-      }
-    )
-  }
+  },[getAllArticle])
 
   const confirm=async(item)=>{
     let res=await axios.delete('/api/article',{
@@ -81,3 +80,16 @@ export default function ArticleManage() {
    </React.Fragment>
   )
 }
+
+export default connect(
+  // mapStateToProps
+  state =>({
+    articleList:state.articleList
+  }),
+
+
+  // mapDispatchToProps
+  dispatch => ({
+    getList:data=>dispatch(getLists(data)),
+  })
+)(ArticleManage)

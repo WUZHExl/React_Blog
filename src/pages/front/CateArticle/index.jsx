@@ -2,10 +2,12 @@ import React from 'react'
 import {useParams,useNavigate} from 'react-router-dom'
 import axios from 'axios'
 import { Tag } from 'antd';
+
 export default function CateArticle() {
 
   let [article,setArticle]=React.useState([])
   let {cate}=useParams()
+  // const {getList}=props
   let key=1
   const navigate = useNavigate()
   React.useEffect(()=>{
@@ -22,6 +24,7 @@ export default function CateArticle() {
         setArticle(article)
       }
     )
+    // getList({url:'article',cate:cate})
   },[cate])
 
   let pathChange=(id)=>{
@@ -67,4 +70,6 @@ export default function CateArticle() {
     </div>
   )
 }
+
+
 

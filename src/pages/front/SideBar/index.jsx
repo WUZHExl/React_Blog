@@ -12,11 +12,17 @@ import {NavLink} from 'react-router-dom'
 import './index.css'
 import axios from 'axios';
 
+import store from '../../../redux/store'
+import {
+  getLists
+} from '../../../redux/actions'
+
 
 export default class SideBar extends Component {
 
 
   state={articleNum:0,cateName:[]}
+
 
   //组件挂载完毕的钩子
   componentDidMount(){
@@ -26,20 +32,14 @@ export default class SideBar extends Component {
       response => this.setState({articleNum:response.data.length})
     )
     this.getAllCateLists()
+
+    store.subscribe(()=>{
+			this.setState({})
+		})
   }
 
-  
   getAllCateLists=()=>{
-    let cateName=[]
-    axios.get('/api/cate/')
-    .then(
-      response =>{
-        cateName.splice(0,cateName.length,...response.data)
-        cateName=cateName.reverse()
-        this.setState({cateName:cateName})
-      }
-    )
-    // console.log(cateName)
+    store.dispatch(getLists({url:'cate'}))
   }
 
   pathChange=(path)=>{
@@ -47,7 +47,7 @@ export default class SideBar extends Component {
   }
 
   render() {
-    const cateName=this.state.cateName
+    const cateName=store.getState().cateList
     return (
       <React.Fragment>
         <div className="left_me">
@@ -118,7 +118,7 @@ export default class SideBar extends Component {
               </ul>
             </div>
         </div>
-        <Outlet  test="123"/>
+        <Outlet/>
       </React.Fragment>
     )
   }
