@@ -2,6 +2,7 @@ import Routes from './routes'
 import React from 'react'
 import './assets/global.css'
 import 'antd/dist/antd.min.css';
+import Login from './pages/Login'
 import {useLocation} from 'react-router-dom'
 
 
@@ -16,7 +17,10 @@ function App() {
     <div className="main">
       <Routes/>
     </div>:
-    <Routes/>
+    (path.pathname.startsWith('/home'))&&sessionStorage.getItem('token')?
+    <Routes/>:
+    <Login/>
+    // <Navigate to="/login"/>
     }
     </React.Fragment>
   );

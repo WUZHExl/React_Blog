@@ -11,7 +11,11 @@ import ArticleManage from '../pages/background/ArticleManage'
 import ArticleEdit from '../pages/background/ArticleEdit'
 import CateManage from '../pages/background/CateManage';
 import {Navigate,Routes, Route,} from 'react-router-dom'
-// const route=[
+
+
+// import {useRoutes} from "react-router-dom";
+// import { Suspense, lazy } from 'react'
+// const routes=[
 //   {path:'/',element:<Navigate to="/article"/>},
 //   {
 //     path:'/article',

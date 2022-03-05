@@ -12,7 +12,7 @@ import {connect} from 'react-redux'
 
 function CateManage(props) {
 
-  let [cateList,setCateList]= useState([])
+  // let [cateList,setCateList]= useState([])
   const [visible,setVisible] = useState(false)
   const [changeVisible,setChangeVisible] = useState(false)
   const [preCate,setPreCate] = useState({id:'',prename:''})
@@ -22,14 +22,13 @@ function CateManage(props) {
 
   let getAllCateLists=useCallback(()=>{
     getList({url:'cate'})
-    setCateList(props.cateList)
-  },[getList,props.cateList])
+    // setCateList(props.cateList)
+  },[getList])
 
   useEffect(() =>{
-
-    getAllCateLists()
-    },
-  [getAllCateLists])
+    getList({url:'cate'})
+    // getAllCateLists()
+  },[getList])
 
   const handleOk=()=>{
     let cate=newCateValue.current.state.value
@@ -109,7 +108,7 @@ function CateManage(props) {
         </Col>
       </Row>
       <div className="cateList">
-          {cateList.map((cate=>{
+          {props.cateList.map((cate=>{
             return (
             <Card key={cate.id}>
               <Row justify="space-between">

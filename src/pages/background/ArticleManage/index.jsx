@@ -12,19 +12,17 @@ import {connect} from 'react-redux'
 
 function ArticleManage(props){
 
-  let [articleList,setArticleList]= React.useState([])
+  // let [articleList,setArticleList]= React.useState([])
   const {getList}=props
   const getAllArticle=useCallback(()=>{
 
     getList({url:'article'})
-    setArticleList(props.articleList)
-    // console.log(props)
-
-  },[getList,props.articleList])
+    // setArticleList(props.articleList)
+  },[getList])
 
   React.useEffect(() =>{
-    getAllArticle()
-  },[getAllArticle])
+    getList({url:'article'})
+  },[getList])
 
   const confirm=async(item)=>{
     let res=await axios.delete('/api/article',{
@@ -54,7 +52,7 @@ function ArticleManage(props){
       </Col>
     </Row>
     <div className="articleList">
-      {articleList.map((article=>{
+      {props.articleList.map((article=>{
         return (
         <Card key={article.id}>
           <Row justify="space-between">

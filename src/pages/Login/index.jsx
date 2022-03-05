@@ -42,6 +42,8 @@ export default function Login() {
       return;
     }
     message.success('登录成功');
+
+    window.sessionStorage.setItem('token',res.data.token)
     navigate('/home',
       {
       replace:false,

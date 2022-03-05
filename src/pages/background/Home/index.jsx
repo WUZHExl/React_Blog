@@ -1,7 +1,7 @@
 import React from 'react'
 import { Layout, Menu,Button } from 'antd';
 import {UserOutlined,EditOutlined,OrderedListOutlined} from '@ant-design/icons';
-import {useNavigate,Link} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 import { Outlet } from 'react-router';
 import './index.css'
 export default function Home() {
@@ -20,13 +20,21 @@ export default function Home() {
       )
   }
 
+  let layout=()=>{
+
+    window.sessionStorage.removeItem('token')
+    navigate(`/login`,
+    {replace:false}
+    )
+  }
+
   return (
     <Layout className="layout-container-demo">
       <Header style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
           <div>
             <span>博客管理系统</span>
           </div>
-          <Link to="/login"><Button>退出</Button></Link>
+          <Button onClick={layout}>退出</Button>
       </Header>
       <Layout style={{marginTop: 64 }}>
         <Sider collapsible collapsed={collapsed} onCollapse={onCollapse} 
