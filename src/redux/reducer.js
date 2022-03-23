@@ -16,6 +16,9 @@ export default function Reducer(preState=initState, action) {
       case 'setLists':{
         let {url,newArr} = data
         if(url==='article'){
+          newArr.map(item=>{
+            return item.createdAt=new Date(item.createdAt).toLocaleString()
+          })
           return{
             ...preState,
             articleList:newArr

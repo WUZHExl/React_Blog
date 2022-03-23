@@ -14,7 +14,9 @@ const Article = db.define('Article', {
   // 文章内容
   content: {type: Sequelize.TEXT, allowNull: false},
   // 所属分类
-  cate: {type: Sequelize.STRING, allowNull: false}
+  cate: {type: Sequelize.STRING, allowNull: false},
+
+  viewcount:{type: Sequelize.INTEGER, allowNull: false}
 
 }, {
   // 是否支持驼峰

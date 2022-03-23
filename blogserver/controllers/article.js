@@ -101,7 +101,18 @@ async function updateArticle(ctx){
     await t.rollback();  
     ctx.body='更新文章失败'
   }
+}
 
+async function updateCount(ctx){
+  try {
+    console.log(ctx.request.body)
+    const article = await ArticleModel.update({viewcount:ctx.request.body.count},{where:{id:ctx.request.body.id}});
+    console.log(article);
+    ctx.body='成功更新文章'
+  }
+  catch (error) {
+    ctx.body='更新文章失败'
+  }
 }
 
 async function remove(ctx){
@@ -126,7 +137,8 @@ let exportObj = {
   info,
   addArticle,
   updateArticle,
-  remove
+  remove,
+  updateCount
 };
 // 导出对象，供其它模块调用
 module.exports = exportObj;

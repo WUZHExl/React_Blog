@@ -10,6 +10,9 @@ import {
 } from '../../../redux/actions'
 //引入connect用于连接UI组件与redux
 import {connect} from 'react-redux'
+import {
+  EyeOutlined
+} from '@ant-design/icons';
 
 
 function Article(props) {
@@ -32,6 +35,7 @@ function Article(props) {
   }
 
 
+
   return (
 
     <div className="content">
@@ -52,6 +56,7 @@ function Article(props) {
                   <div className="article_title" onClick={()=>pathChange(article.id)}>{ article.title }</div>
                   <div className="article_info">
                     <span className="article_info_date">发表于：{article.createdAt }</span>
+                    <span><EyeOutlined/>{article.viewcount||0}</span>
                     <span className="article_info_label">标签：
                     {cate}
                     </span>

@@ -84,7 +84,6 @@ function CateManage(props) {
         }
       )
 
-
   }
 
   const changeCancel=()=>{

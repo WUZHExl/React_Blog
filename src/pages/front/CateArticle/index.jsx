@@ -2,12 +2,14 @@ import React from 'react'
 import {useParams,useNavigate} from 'react-router-dom'
 import axios from 'axios'
 import { Tag } from 'antd';
+import {
+  EyeOutlined
+} from '@ant-design/icons';
 
 export default function CateArticle() {
 
   let [article,setArticle]=React.useState([])
   let {cate}=useParams()
-  // const {getList}=props
   let key=1
   const navigate = useNavigate()
   React.useEffect(()=>{
@@ -17,11 +19,14 @@ export default function CateArticle() {
         // console.log(response)
         let article =[]
         let temp=response.data.filter(item=>{
+          item.createdAt=new Date(item.createdAt).toLocaleString()
           return item.cate.split(',').indexOf(cate)!==-1
         })
+        
         article.splice(0,article.length,...temp)
         article=article.reverse()
         setArticle(article)
+        console.log(article)
       }
     )
     // getList({url:'article',cate:cate})
@@ -56,6 +61,7 @@ export default function CateArticle() {
               <div className="article_title" onClick={()=>pathChange(article.id)}>{ article.title }</div>
               <div className="article_info">
                 <span className="article_info_date">发表于：{article.createdAt }</span>
+                <span><EyeOutlined/>{article.viewcount||0}</span>
                 <span className="article_info_label">标签：
                 {cate}
                 </span>

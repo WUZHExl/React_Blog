@@ -14,6 +14,6 @@ router.put ('/article', ArticleController.updateArticle);
 // 定义删除文章路由，DELETE请求
 router.delete ('/article', ArticleController.remove);
 // 导出路由，供app.js文件调用
-
+router.put ('/article/Count', ArticleController.updateCount);
 
 module.exports = router;
